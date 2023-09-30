@@ -4,19 +4,9 @@ import SelectionList from "../SelectionList";
 import Button from "../Button";
 import {useState} from "react";
 
-const Form = () => {
-    const teams = [
-        'Programação',
-        'Front-End',
-        'Data Science',
-        'Devops',
-        'UX e Design',
-        'Mobile',
-        ' Inovação e Gestão'
-    ]
-
-    // //React only changes a component in the DOM if its state, not just its value, changes. To do so
-    // //we create a state var controlled by a hook, which lets you add react state to a function component
+const Form = (props) => {
+    //React only changes a component in the DOM if its state, not just its value, changes. To do so
+    //we create a state var controlled by a hook, which lets you add react state to a function component
     const[nome, setNome] = useState('')
     const[cargo, setCargo] = useState('')
     const[imagem, setImagem] = useState('')
@@ -24,7 +14,11 @@ const Form = () => {
 
     const onSaving = (evt) =>{
         evt.preventDefault()
-        console.log('Form foi submetido', nome, cargo, imagem, time)
+        props.onFormSaving({nome, cargo, imagem, time})
+        setNome('')
+        setCargo('')
+        setImagem('')
+        setTime(props.teams[0])
     }
 
     return (
@@ -53,7 +47,7 @@ const Form = () => {
                 <SelectionList
                     required ={true}
                     label = "Encontre seu Squad"
-                    items = {teams}
+                    items = {props.teams}
                     val = {time}
                     onChanging={val => setTime(val)}
                 />
