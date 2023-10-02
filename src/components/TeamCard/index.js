@@ -16,7 +16,9 @@ const TeamCard = (props) => {
                         <TeamMemberCard key={teamMember.nome}
                                         nome={teamMember.nome}
                                         cargo={teamMember.cargo}
-                                        img={teamMember.imagem}/>
+                                        img={teamMember.imagem}
+                                        bgColor={props.primaryColor}
+                        />
                       )
                   }
               </div>

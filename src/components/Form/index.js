@@ -18,7 +18,7 @@ const Form = (props) => {
         setNome('')
         setCargo('')
         setImagem('')
-        setTime(props.teams[0])
+        setTime('')
     }
 
     return (

@@ -47,6 +47,7 @@ function App() {
     const [contractors, setContractors] = useState([])
 
     const saveContractor = (contractor) => {
+        debugger
         setContractors([...contractors, contractor])
     }
 
