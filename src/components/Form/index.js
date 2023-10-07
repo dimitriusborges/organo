@@ -3,6 +3,7 @@ import TextField from "../TextField";
 import SelectionList from "../SelectionList";
 import Button from "../Button";
 import {useState} from "react";
+import {v4 as uuidv4} from 'uuid';
 
 const Form = (props) => {
     //React only changes a component in the DOM if its state, not just its value, changes. To do so
@@ -14,7 +15,8 @@ const Form = (props) => {
 
     const onSaving = (evt) =>{
         evt.preventDefault()
-        props.onFormSaving({nome, cargo, imagem, time})
+        const id = uuidv4()
+        props.onFormSaving({id, nome, cargo, imagem, time})
         setNome('')
         setCargo('')
         setImagem('')

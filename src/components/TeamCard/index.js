@@ -11,12 +11,13 @@ const TeamCard = (teamData) => {
           <section className="teamCard" style={{backgroundColor: hexToRgba(teamData.primaryColor, 0.5)}}>
               <input type='color' className='input-cor'
                      value={teamData.secondaryColor}
-                     onChange={evt => teamData.onColorChange(evt.target.value, teamData.nome)}/>
+                     onChange={evt => teamData.onColorChange(evt.target.value, teamData.id)}/>
               <h3 style={{borderColor: teamData.secondaryColor}}>{teamData.nome}</h3>
               <div className='teamMembers'>
                   {
                       teamData.teamMembers.map(teamMember => {
-                              return (<TeamMemberCard key={teamMember.nome}
+                              return (<TeamMemberCard key={teamMember.id}
+                                                id = {teamMember.id}
                                                 nome={teamMember.nome}
                                                 cargo={teamMember.cargo}
                                                 img={teamMember.imagem}
