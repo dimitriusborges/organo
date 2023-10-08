@@ -12,17 +12,20 @@ const TeamCard = (teamData) => {
               <input type='color' className='input-cor'
                      value={teamData.secondaryColor}
                      onChange={evt => teamData.onColorChange(evt.target.value, teamData.id)}/>
-              <h3 style={{borderColor: teamData.secondaryColor}}>{teamData.nome}</h3>
+              <h3 style={{borderColor: teamData.secondaryColor}}>{teamData.name}</h3>
               <div className='teamMembers'>
                   {
                       teamData.teamMembers.map(teamMember => {
                               return (<TeamMemberCard key={teamMember.id}
-                                                id = {teamMember.id}
-                                                nome={teamMember.nome}
-                                                cargo={teamMember.cargo}
-                                                img={teamMember.imagem}
-                                                bgColor={teamData.secondaryColor}
-                                                onRemoving = {teamData.onMemberRemoving}
+                                                    id = {teamMember.id}
+                                                    name={teamMember.name}
+                                                    cargo={teamMember.cargo}
+                                                    img={teamMember.imagem}
+                                                    favorite = {teamMember.favorite}
+                                                    bgColor={teamData.secondaryColor}
+                                                    onRemoving = {teamData.onMemberRemoving}
+                                                    onMemberFavorite={teamData.onMemberFavorite}
+
                               />)
                           }
                       )

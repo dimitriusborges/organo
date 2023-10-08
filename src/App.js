@@ -10,37 +10,37 @@ function App() {
     const teamsSetup = [
         {
             id: uuidv4(),
-            nome: 'Programação',
+            name: 'Programação',
             color: '#D9F7E9',
         },
         {
             id: uuidv4(),
-            nome: 'Front-End',
+            name: 'Front-End',
             color: '#E8F8FF',
         },
         {
             id: uuidv4(),
-            nome: 'Data Sciense',
+            name: 'Data Sciense',
             color: '#F0F8E2',
         },
         {
             id: uuidv4(),
-            nome: 'Devops',
+            name: 'Devops',
             color: '#FDE7E8',
         },
         {
             id: uuidv4(),
-            nome: 'UX e Design',
+            name: 'UX e Design',
             color: '#FAE5F5',
         },
         {
             id: uuidv4(),
-            nome: 'Mobile',
+            name: 'Mobile',
             color: '#FFF5D9',
         },
         {
             id: uuidv4(),
-            nome: 'Inovação e Gestão',
+            name: 'Inovação e Gestão',
             color: '#FFEEDF',
         }
     ]
@@ -50,7 +50,13 @@ function App() {
     const [contractors, setContractors] = useState([])
 
     const saveContractor = (contractor) => {
+        contractor.id = uuidv4()
+        contractor.favorite = false
         setContractors([...contractors, contractor])
+    }
+    const saveTeam = (team) => {
+        team.id = uuidv4()
+        setTeams([...teams, team])
     }
 
     const onTeamMemberRemoving = (memberId) => {
@@ -69,20 +75,35 @@ function App() {
         ))
     }
 
+    const onTeamMemberFavoriteAction = (id) => {
+        setContractors(contractors.map(contractor => {
+                    if (contractor.id === id) {
+                        contractor.favorite = !contractor.favorite
+                    }
+                    return contractor
+                }
+            )
+        )
+    }
+
     return (
     <div className="App">
         <Banner/>
-        <Form onFormSaving={saveContractor} teams={teams.map(team => team.nome)}/>
+        <Form
+            onContractorFormSaving={saveContractor}
+            onTeamFormSaving={saveTeam}
+            teams={teams.map(team => team.name)}/>
         {
             teams.map(team =>
                 <TeamCard key={team.id}
                           id={team.id}
-                          nome={team.nome}
+                          name={team.name}
                           primaryColor={team.color}
                           secondaryColor={team.color}
-                          teamMembers={contractors.filter(contractor => contractor.time === team.nome)}
+                          teamMembers={contractors.filter(contractor => contractor.time === team.name)}
                           onMemberRemoving={onTeamMemberRemoving}
                           onColorChange={onChangeTeamColor}
+                          onMemberFavorite={onTeamMemberFavoriteAction}
                 >
                 </TeamCard>
             )

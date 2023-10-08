@@ -5,7 +5,7 @@
 
 .teamMemberCard .cabecalho {
     background-color:  #F0F0F0;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 0 0;
 }
 
 .teamMemberCard img {
@@ -18,7 +18,7 @@
 .teamMemberCard .rodape {
     background: #FFFFFF;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.08);
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 0 0 10px 10px;
     padding-top: 90px;
     padding-bottom: 40px;
 }
@@ -42,4 +42,8 @@
     position: absolute;
     right: -10px;
     top: -10px;
+}
+
+.teamMemberCard .favorite{
+    margin-top: 20px;
 }

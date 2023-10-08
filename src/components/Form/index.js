@@ -1,9 +1,8 @@
 import './Form.css'
-import TextField from "../TextField";
+import Field from "../Field";
 import SelectionList from "../SelectionList";
 import Button from "../Button";
 import {useState} from "react";
-import {v4 as uuidv4} from 'uuid';
 
 const Form = (props) => {
     //React only changes a component in the DOM if its state, not just its value, changes. To do so
@@ -13,34 +12,43 @@ const Form = (props) => {
     const[imagem, setImagem] = useState('')
     const[time, setTime] = useState('')
 
-    const onSaving = (evt) =>{
+    const [teamName, setTeamName] = useState('')
+    const [teamColor, setTeamColor] = useState('')
+
+    const onSavingContractor = (evt) =>{
         evt.preventDefault()
-        const id = uuidv4()
-        props.onFormSaving({id, nome, cargo, imagem, time})
+        props.onContractorFormSaving({nome, cargo, imagem, time})
         setNome('')
         setCargo('')
         setImagem('')
         setTime('')
     }
 
+    const onSavingTeam = (evt) => {
+        evt.preventDefault()
+        props.onTeamFormSaving({name: teamName, color: teamColor})
+        setTeamName('')
+        setTeamColor('')
+    }
+
     return (
         <section className="masterForm">
-            <form onSubmit={onSaving}>
+            <form onSubmit={onSavingContractor}>
                 <h2>Preencha os dados para criar o card do colaborador</h2>
-                <TextField
+                <Field
                     required ={true}
                     label = "Nome"
                     placeholder="Digite o seu nome"
                     val = {nome}
                     onChanging = {val => setNome(val)}
                 />
-                <TextField required ={true}
-                           label = "Cargo"
-                           placeholder="Digite o seu cargo"
-                           val = {cargo}
-                           onChanging = {val => setCargo(val)}
+                <Field required ={true}
+                       label = "Cargo"
+                       placeholder="Digite o seu cargo"
+                       val = {cargo}
+                       onChanging = {val => setCargo(val)}
                 />
-                <TextField
+                <Field
                     label = "Imagem"
                     placeholder="Digite o endereço da imagem"
                     val = {imagem}
@@ -55,6 +63,26 @@ const Form = (props) => {
                 />
                 <Button>
                     Criar card
+                </Button>
+            </form>
+            <form onSubmit={onSavingTeam}>
+                <h2>Preencha os dados para criar um novo time</h2>
+                <Field
+                    required ={true}
+                    label = "Nome"
+                    placeholder="Digite o nome do time"
+                    val = {teamName}
+                    onChanging = {val => setTeamName(val)}
+                />
+                <Field required ={true}
+                       type = 'color'
+                       label = "Cor"
+                       placeholder="Digite a cor do time"
+                       val = {teamColor}
+                       onChanging = {val => setTeamColor(val)}
+                />
+                <Button>
+                    Criar um novo time
                 </Button>
             </form>
         </section>
